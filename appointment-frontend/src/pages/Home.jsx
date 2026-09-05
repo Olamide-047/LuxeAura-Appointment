@@ -16,7 +16,7 @@ export default function Home() {
           />
           {/* Radial center glow to pop hero text, linear bottom fade to blend with next section */}
           <div className="absolute inset-0 bg-radial from-brandDark/40 via-brandDark/75 to-brandDark" />
-          <div className="absolute inset-0 bg-gradient-to-t from-brandDark via-transparent to-brandDark/50" />
+          <div className="absolute inset-0 bg-linear-to-t from-brandDark via-transparent to-brandDark/50" />
         </div>
 
         <motion.div
@@ -30,7 +30,7 @@ export default function Home() {
           </span>
           <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 drop-shadow-md">
             Elegance Reserved <br />
-            <span className="bg-gradient-to-r from-brandGold via-amber-200 to-brandPink bg-clip-text text-transparent inline-block">
+            <span className="bg-linear-to-r from-brandGold via-amber-200 to-brandPink bg-clip-text text-transparent inline-block">
               Just For You.
             </span>
           </h1>
@@ -41,7 +41,7 @@ export default function Home() {
           <div className="flex justify-center gap-4">
             <Link
               to="/book"
-              className="bg-gradient-to-r from-brandGold to-amber-500 text-brandDark font-bold px-8 py-4 rounded-xl shadow-lg hover:shadow-brandGold/40 transition transform hover:-translate-y-1"
+              className="bg-linear-to-r from-brandGold to-amber-500 text-brandDark font-bold px-8 py-4 rounded-xl shadow-lg hover:shadow-brandGold/40 transition transform hover:-translate-y-1"
             >
               Book Appointment Now
             </Link>

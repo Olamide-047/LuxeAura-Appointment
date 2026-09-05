@@ -1,4 +1,4 @@
-import  { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import { DollarSign, BookOpen, CheckCircle, RefreshCw } from 'lucide-react';
 
@@ -8,11 +8,8 @@ export default function AdminDashboard() {
   const [stats, setStats] = useState({ totalBookings: 0, activeBookings: 0, totalRevenue: 0 });
   const [appointments, setAppointments] = useState([]);
 
-  useEffect(() => {
-    loadData();
-  }, []);
-
-  const loadData = async () => {
+  // 1. Defined loadData using useCallback before useEffect
+  const loadData = useCallback(async () => {
     try {
       const statsRes = await axios.get(`${API_BASE}/stats`);
       setStats(statsRes.data);
@@ -22,7 +19,12 @@ export default function AdminDashboard() {
     } catch (err) {
       console.error(err);
     }
-  };
+  }, []);
+
+  // 2. Trigger loadData safely on initial component mount
+  useEffect(() => {
+    loadData();
+  }, [loadData]);
 
   const updateStatus = async (id, newStatus) => {
     try {
@@ -38,7 +40,10 @@ export default function AdminDashboard() {
       <div className="max-w-6xl mx-auto">
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-extrabold text-brandGold">Admin Management Dashboard</h1>
-          <button onClick={loadData} className="flex items-center gap-2 bg-white/10 hover:bg-white/20 p-2 px-4 rounded-xl text-xs font-semibold">
+          <button 
+            onClick={loadData} 
+            className="flex items-center gap-2 bg-white/10 hover:bg-white/20 p-2 px-4 rounded-xl text-xs font-semibold cursor-pointer transition-colors"
+          >
             <RefreshCw className="w-4 h-4" /> Refresh
           </button>
         </div>
@@ -82,16 +87,22 @@ export default function AdminDashboard() {
             </thead>
             <tbody className="divide-y divide-gray-800 text-sm">
               {appointments.map((item) => (
-                <tr key={item._id} className="hover:bg-white/5">
+                <tr key={item._id} className="hover:bg-white/5 transition-colors">
                   <td className="p-4">
                     <p className="font-bold text-white">{item.userName}</p>
                     <p className="text-xs text-gray-400">{item.userEmail}</p>
                   </td>
-                  <td className="p-4 font-semibold text-brandGold">{item.serviceName} (${item.price})</td>
-                  <td className="p-4 text-gray-300">{item.date} at {item.timeSlot}</td>
+                  <td className="p-4 font-semibold text-brandGold">
+                    {item.serviceName} (${item.price})
+                  </td>
+                  <td className="p-4 text-gray-300">
+                    {item.date} at {item.timeSlot}
+                  </td>
                   <td className="p-4">
                     <span className={`px-3 py-1 rounded-full text-xs font-bold ${
-                      item.status === 'Confirmed' ? 'bg-green-500/20 text-green-400 border border-green-500/30' : 'bg-red-500/20 text-red-400 border border-red-500/30'
+                      item.status === 'Confirmed' 
+                        ? 'bg-green-500/20 text-green-400 border border-green-500/30' 
+                        : 'bg-red-500/20 text-red-400 border border-red-500/30'
                     }`}>
                       {item.status}
                     </span>
@@ -100,14 +111,14 @@ export default function AdminDashboard() {
                     {item.status === 'Confirmed' ? (
                       <button
                         onClick={() => updateStatus(item._id, 'Cancelled')}
-                        className="bg-red-500/20 text-red-400 hover:bg-red-500/30 px-3 py-1 rounded-lg text-xs"
+                        className="bg-red-500/20 text-red-400 hover:bg-red-500/30 px-3 py-1 rounded-lg text-xs cursor-pointer transition-colors"
                       >
                         Cancel Slot
                       </button>
                     ) : (
                       <button
                         onClick={() => updateStatus(item._id, 'Confirmed')}
-                        className="bg-green-500/20 text-green-400 hover:bg-green-500/30 px-3 py-1 rounded-lg text-xs"
+                        className="bg-green-500/20 text-green-400 hover:bg-green-500/30 px-3 py-1 rounded-lg text-xs cursor-pointer transition-colors"
                       >
                         Restore Slot
                       </button>

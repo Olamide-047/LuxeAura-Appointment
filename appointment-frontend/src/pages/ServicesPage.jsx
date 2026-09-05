@@ -93,7 +93,7 @@ export default function ServicesPage() {
               <div className="p-6 pt-0">
                 <button
                   onClick={() => navigate('/book', { state: { selectedService: srv.title, price: srv.price } })}
-                  className="w-full bg-gradient-to-r from-brandGold to-amber-400 text-brandDark font-bold py-3 rounded-xl hover:bg-brandGoldHover transition"
+                  className="w-full bg-linear-to-r from-brandGold to-amber-400 text-brandDark font-bold py-3 rounded-xl hover:bg-brandGoldHover transition"
                 >
                   Book This Service
                 </button>

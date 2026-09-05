@@ -1,4 +1,4 @@
-import  { useState, useEffect } from 'react';
+import  { useState, useEffect, useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -25,18 +25,18 @@ export default function BookingPage() {
 
   const [statusModal, setStatusModal] = useState({ open: false, isSuccess: false, message: '' });
 
-  useEffect(() => {
-    fetchSlots();
-  }, [date]);
-
-  const fetchSlots = async () => {
+  const fetchSlots = useCallback(async () => {
     try {
       const res = await axios.get(`${API_BASE}/booked-slots?date=${date}`);
       setBookedSlots(res.data);
     } catch (err) {
       console.error(err);
     }
-  };
+  }, [date]);
+
+  useEffect(() => {
+    fetchSlots();
+  }, [fetchSlots]);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -131,7 +131,7 @@ export default function BookingPage() {
 
           <button
             type="submit"
-            className="w-full bg-gradient-to-r from-brandGold via-amber-400 to-brandPink text-brandDark font-extrabold py-4 rounded-xl shadow-lg hover:brightness-110 transition"
+            className="w-full bg-linear-to-r from-brandGold via-amber-400 to-brandPink text-brandDark font-extrabold py-4 rounded-xl shadow-lg hover:brightness-110 transition"
           >
             Confirm Reservation
           </button>
