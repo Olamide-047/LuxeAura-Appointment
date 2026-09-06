@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Calendar, Clock, User, Mail, Phone, CheckCircle2, AlertCircle, Sparkles } from 'lucide-react';
 
 const SLOTS = ["09:00 AM", "10:30 AM", "01:00 PM", "02:30 PM", "04:00 PM", "05:30 PM"];
-const API_BASE = "http://localhost:5000/api/appointments";
+const API_BASE = "https://luxeaura-appointment.onrender.com";
 const BACKGROUND_IMAGE_PATH = "/bookbg.jpg";
 
 const SERVICES = [
