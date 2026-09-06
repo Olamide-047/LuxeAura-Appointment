@@ -12,7 +12,7 @@ export default function Home() {
           <img
             src="/hero.jpg"
             alt="Luxury Salon Spa Background"
-            className="w-full h-full object-cover opacity-60 filter brightness-90 contrast-105 scale-100"
+            className="w-full h-full object-cover opacity-60 filter brightness-90 contrast-310 scale-100"
           />
           {/* Radial center glow to pop hero text, linear bottom fade to blend with next section */}
           <div className="absolute inset-0 bg-radial from-brandDark/40 via-brandDark/75 to-brandDark" />

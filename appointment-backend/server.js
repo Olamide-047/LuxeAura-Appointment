@@ -6,7 +6,14 @@ require('dotenv').config();
 const appointmentRoutes = require('./routes/appointmentRoutes');
 
 const app = express();
-app.use(cors());
+
+// Explicit CORS options for HTTP verbs including DELETE
+app.use(cors({
+  origin: '*', // or your frontend origin, e.g. 'http://localhost:5173'
+  methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
 app.use(express.json());
 
 app.use('/api/appointments', appointmentRoutes);

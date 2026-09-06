@@ -12,7 +12,7 @@ const appointmentSchema = new mongoose.Schema({
   notes: { type: String, default: '' }
 }, { timestamps: true });
 
-// Prevent double bookings on the exact same date and slot
-appointmentSchema.index({ date: 1, timeSlot: 1 }, { unique: true });
+// Updated index: Allows rebooking if a previous slot was set to 'Cancelled'
+appointmentSchema.index({ date: 1, timeSlot: 1, status: 1 });
 
 module.exports = mongoose.model('Appointment', appointmentSchema);
