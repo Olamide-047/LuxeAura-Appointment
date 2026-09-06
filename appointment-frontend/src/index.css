@@ -1,7 +1,7 @@
 
 @import "tailwindcss";
 
-:root {
+@theme {
   --color-brandDark: #0a0a0a;
   --color-brandGold: #d4af37;
   --color-brandGoldHover: #f3e5ab;
