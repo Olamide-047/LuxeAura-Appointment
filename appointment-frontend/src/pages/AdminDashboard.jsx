@@ -2,7 +2,7 @@ import { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import { DollarSign, BookOpen, CheckCircle, RefreshCw, Trash2, Loader2 } from 'lucide-react';
 
-const API_BASE = " https://luxeaura-appointment.onrender.com";
+const API_BASE = "https://luxeaura-appointment.onrender.com/api/appointments";
 const BACKGROUND_IMAGE_PATH = "/adminbg.jpg";
 
 export default function AdminDashboard() {
